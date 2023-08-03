@@ -1,0 +1,110 @@
+#include <iostream>
+#include <conio.h> //Para usar função _hbhit() e _getch() para entrada
+#include <unistd.h> // para usar usleep() para pausar o jogo no linux fodace
+
+using namespace std;
+
+const int Width = 80;
+const int Height = 20;
+
+class pong{
+    public:
+    pong() : bolaX(Width / 2), bolaY(Height / 2), paddle1Y(Height / 2 - 2), paddle2Y(Height / 2-2), bolaDirX(-1), bolaDirY(0), Perdeu(false) {
+       void draw(){
+        system("cls || clear"); //Limpar a tela do sonsole no Windows
+
+        //desenhar o topo da tela
+        for (int i = 0; i < Width + 2; i++)
+        cout << "#";
+        cout << fim1;
+    }
+    // Desenhar o conteudo(bola, raquete e espaço em branco)
+    for (int i = 0; i < Height; i++){
+        for (int j = 0; i < Width; j++) {
+            if (j == 0)
+                cout << "#" //parede esquerda
+            if (i == bolaY && j == bolaX)
+            cout << "0"; //bola
+            else if (i >= paddle1Y && i < paddle1Y + 4 && j == 1)
+            count << "|"; //raquete jogador 1 
+            else if (i >= paddle2Y && i < paddle2Y + 4 && j == Width - 2)
+            count << "|"; //raquete do vagabundo 2
+            else if (j == Width - 1)
+            count << "#"; //parede direita
+            else
+            count << " ";
+}
+    }
+    cout << fim1;
+}
+//Desenhar o fundo da tela
+for (int i = 0; i < Width + 2; i++){
+    count << "#";
+    count << fim1;
+}
+
+void input()
+if (_kbhit()){ //verificar se alguma tecla foi pressionada
+    char Chave = _getch(); //lê o caractere da tecla pressionada
+
+    if (chave == 'w' && paddle1Y > 0)
+    paddle1Y--;
+    if (chave == 's' && paddle1Y + 4 < Height)
+    paddle1Y++;
+    if (chave == 72 && paddle2Y > 0)// tecla para cima 
+    paddle2Y--;
+    if(chave == 80 && paddle2y + 4 < Height)// tecla de seta para baixo
+    paddle2Y--;
+    if (chave == 'q')// rage quit fodidokkkkkkkkkk
+    Perdeu = true;
+
+    } 
+    
+}
+
+void logic(){
+    //logica para mover a bola ( ͡° ͜ʖ ͡°)
+
+    bolaX += bolaDirX;
+    bolaY += bolaDirY;
+
+    //ver se a bola bate na parede
+    if (bolaY == 0 || bolaY == Height - 1)
+    bolaDirY == -bolaDirY;
+
+    //ver colisão da bola com o baseball bat ( ͡° ͜ʖ ͡°)
+
+    if (bolaX == 2 && bolaY >= paddle1Y && bolaY <= paddle1Y + 3)
+    bolaDirX = -bolaDirX;
+    if (bolaX == Width - 3 && bolaY >= paddle2Y && bolaY <= paddle2Y +3)
+    // verificar se a bola passo pela raquete e alguem marcou ponto
+    if (bolaX == 0){
+        count << "Mama bola jogador 1!"<< fim1;
+        usleep(2000000); //pausar o jogo por 2 seg
+        bolaX = Width / 2;
+        bolaY = Height / 2;
+        bolaDirX = -bolaDirX;
+        bolaDirY = 0;
+
+        
+    }
+    if (bolaX == Width - 1){
+        count << "Mama bola jogador 2!"<< fim1
+        usleep(2000000);//pausar por 2 seg
+        bolaX = Width / 2;
+        bolaY = Height / 2;
+        bolaDirX = -bolaDirX
+        bolaDirY = 0;
+
+    }
+}
+
+bool Jogorodando(){
+    return !Cabou;
+}
+private:
+int bolaX, bolaY; //posição das bola ( ͡° ͜ʖ ͡°) Ta pareikkkkkkk
+int paddle1Y, paddle2Y;
+int bolaDirX, bolaDirY;
+bool Cabou;
+};
